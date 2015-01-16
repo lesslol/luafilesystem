@@ -19,6 +19,7 @@
 #define getcwd(d, s) (_getcwd(d, s))
 #define rmdir(p) (_rmdir(p))
 #define fileno(f) (_fileno(f))
+#define utime(f,t) (_utime(f,(struct _utimbuf*)t))
 #endif
 
 
