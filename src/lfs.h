@@ -11,7 +11,6 @@
 #define chdir_error	"Function 'chdir' not provided by system"
 #else
 #define chdir_error	strerror(errno)
-
 #endif
 
 #ifdef _WIN32
@@ -19,7 +18,13 @@
 #define getcwd(d, s) (_getcwd(d, s))
 #define rmdir(p) (_rmdir(p))
 #define fileno(f) (_fileno(f))
-#define utime(f,t) (_utime(f,(struct _utimbuf*)t))
+#ifdef _MSC_VER
+# define utime(p,t) (_utime(p,(struct _utimbuf*)t))
+# ifdef mkdir
+#  undef mkdir
+# endif
+# define mkdir(p,m) (_mkdir(p))
+#endif
 #endif
 
 

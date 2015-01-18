@@ -435,12 +435,8 @@ static int make_link(lua_State *L)
 static int make_dir (lua_State *L) {
         const char *path = luaL_checkstring (L, 1);
         int fail;
-#ifdef _WIN32
-        fail = _mkdir (path);
-#else
         fail =  mkdir (path, S_IRUSR | S_IWUSR | S_IXUSR | S_IRGRP |
                              S_IWGRP | S_IXGRP | S_IROTH | S_IXOTH );
-#endif
         if (fail) {
                 lua_pushnil (L);
         lua_pushfstring (L, "%s", strerror(errno));
